@@ -1,4 +1,4 @@
-package com.ecommerce.domain.entities;
+package com.sonoraai.domain.entities;
 
 
 import jakarta.persistence.*;

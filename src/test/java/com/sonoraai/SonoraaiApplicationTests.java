@@ -1,10 +1,10 @@
-//package com.ecommerce;
+//package com.sonoraai;
 //
 //import org.junit.jupiter.api.Test;
 //import org.springframework.boot.test.context.SpringBootTest;
 //
 //@SpringBootTest
-//class EcommerceApplicationTests {
+//class SonoraaiApplicationTests {
 //
 //	@Test
 //	void contextLoads() {

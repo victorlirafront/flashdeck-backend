@@ -1,9 +1,9 @@
-package com.ecommerce.infra.security;
+package com.sonoraai.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.ecommerce.domain.entities.User;
+import com.sonoraai.domain.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.ecommerce.repositories;
+package com.sonoraai.repositories;
 
-import com.ecommerce.domain.entities.User;
+import com.sonoraai.domain.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

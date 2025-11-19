@@ -8,11 +8,11 @@
 		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ecommerce</groupId>
-	<artifactId>ecommerce</artifactId>
+	<groupId>com.sonoraai</groupId>
+	<artifactId>sonoraai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ecommerce</name>
-	<description>Ecommerce de roupas</description>
+	<name>sonoraai</name>
+	<description>Sonora AI Backend</description>
 	<url/>
 	<licenses>
 		<license/>

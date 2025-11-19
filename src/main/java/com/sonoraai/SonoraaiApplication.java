@@ -1,13 +1,13 @@
-package com.ecommerce;
+package com.sonoraai;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EcommerceApplication {
+public class SonoraaiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EcommerceApplication.class, args);
+		SpringApplication.run(SonoraaiApplication.class, args);
 	}
 
 }

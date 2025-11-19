@@ -1,4 +1,4 @@
-package com.ecommerce.dto;
+package com.sonoraai.dto;
 
 public record RegisterRequestDTO (String name, String email, String password) {
 }

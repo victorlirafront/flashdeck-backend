@@ -1,7 +1,7 @@
-package com.ecommerce.infra.security;
+package com.sonoraai.infra.security;
 
-import com.ecommerce.domain.entities.User;
-import com.ecommerce.repositories.UserRepository;
+import com.sonoraai.domain.entities.User;
+import com.sonoraai.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

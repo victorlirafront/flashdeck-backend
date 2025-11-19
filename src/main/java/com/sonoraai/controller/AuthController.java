@@ -1,12 +1,12 @@
-package com.ecommerce.controller;
+package com.sonoraai.controller;
 
 
-import com.ecommerce.domain.entities.User;
-import com.ecommerce.dto.LoginRequestDTO;
-import com.ecommerce.dto.RegisterRequestDTO;
-import com.ecommerce.dto.ResponseDTO;
-import com.ecommerce.infra.security.TokenService;
-import com.ecommerce.repositories.UserRepository;
+import com.sonoraai.domain.entities.User;
+import com.sonoraai.dto.LoginRequestDTO;
+import com.sonoraai.dto.RegisterRequestDTO;
+import com.sonoraai.dto.ResponseDTO;
+import com.sonoraai.infra.security.TokenService;
+import com.sonoraai.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
