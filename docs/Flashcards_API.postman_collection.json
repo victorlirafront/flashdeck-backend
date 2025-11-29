@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "flashcards-auth-collection",
+		"name": "Flashcards API - Complete",
+		"description": "Collection completa para testar os endpoints de autenticação da API de Flashcards.\n\n**Como usar:**\n1. Importe este arquivo no Postman\n2. As variáveis já estão configuradas na collection\n3. Execute as requisições na ordem: Register -> Login\n\n**Variáveis:**\n- base_url: http://localhost:8080\n- auth_token: Token JWT (preenchido automaticamente)\n- user_name: Nome do usuário (preenchido automaticamente)\n\n**Endpoints:**\n- POST /auth/register - Registra um novo usuário\n- POST /auth/login - Faz login e retorna token JWT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set(\"auth_token\", jsonData.token);",
+									"    pm.collectionVariables.set(\"user_name\", jsonData.name);",
+									"    console.log(\"✅ Token salvo automaticamente: \" + jsonData.token);",
+									"    console.log(\"✅ Usuário: \" + jsonData.name);",
+									"} else {",
+									"    console.log(\"❌ Erro no registro: \" + pm.response.code);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Registra um novo usuário no sistema.\n\n**Request Body:**\n```json\n{\n    \"name\": \"Test User\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}\n```\n\n**Resposta esperada:** 201 Created\n```json\n{\n    \"name\": \"Test User\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}\n```\n\nO token JWT é salvo automaticamente na variável `auth_token`."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set(\"auth_token\", jsonData.token);",
+									"    pm.collectionVariables.set(\"user_name\", jsonData.name);",
+									"    console.log(\"✅ Token salvo automaticamente: \" + jsonData.token);",
+									"    console.log(\"✅ Usuário: \" + jsonData.name);",
+									"} else {",
+									"    console.log(\"❌ Erro no login: \" + pm.response.code);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Faz login com email e senha.\n\n**Request Body:**\n```json\n{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}\n```\n\n**Resposta esperada:** 200 OK\n```json\n{\n    \"name\": \"Test User\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}\n```\n\nO token JWT é salvo automaticamente na variável `auth_token`.\n\n**Para usar o token em outras requisições:**\nAdicione o header:\n```\nAuthorization: Bearer {{auth_token}}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - Invalid Credentials",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"wrongpassword\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Testa login com credenciais inválidas.\n\n**Resposta esperada:** 401 Unauthorized\n```json\n{\n    \"timestamp\": \"2025-11-29T14:30:00\",\n    \"status\": 401,\n    \"error\": \"Invalid Credentials\",\n    \"message\": \"Invalid password\"\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Register - Duplicate Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Another User\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Tenta registrar um usuário com email já existente.\n\n**Resposta esperada:** 409 Conflict\n```json\n{\n    \"timestamp\": \"2025-11-29T14:30:00\",\n    \"status\": 409,\n    \"error\": \"User Already Exists\",\n    \"message\": \"User already exists with email: test@example.com\"\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - User Not Found",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"nonexistent@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Testa login com usuário que não existe.\n\n**Resposta esperada:** 404 Not Found\n```json\n{\n    \"timestamp\": \"2025-11-29T14:30:00\",\n    \"status\": 404,\n    \"error\": \"User Not Found\",\n    \"message\": \"User not found with email: nonexistent@example.com\"\n}\n```"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints de autenticação da API de Flashcards"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_name",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
+
